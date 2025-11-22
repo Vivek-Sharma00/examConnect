@@ -1,158 +1,88 @@
-🎓 ExamConnect
+# ExamConnect
 
-ExamConnect is a full-stack real-time examination and communication platform designed for students and administrators. It supports group-based chat, real-time messaging, quiz management, and secure authentication.
+A project I built to practice real-time systems, authentication, and database-driven apps.
 
-🚀 Live Demo
-🌐 Frontend (Netlify)
+Live:
+Frontend → https://examconnect.netlify.app  
+Backend → https://examconnect-backend.onrender.com/api/health
 
-👉 https://examconnect.netlify.app/
+---
 
-🧠 Backend Health Check (Render)
+## What this actually is
 
-👉 https://examconnect-backend.onrender.com/api/health
+This is not a template project.  
+I built it from scratch to understand:
 
-🏗️ Project Architecture
-examConnect/
-├── backend/
-│   ├── config/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── middleware/
-│   ├── websocket/
-│   └── app.js
-│
-├── frontend/
-│   ├── services/
-│   ├── authentication/
-│   ├── chat/
-│   ├── config.js
-│   └── index.html
+- WebSockets
+- JWT authentication
+- MongoDB relations
+- File uploads
+- Real-time systems
 
-✨ Features
-🔐 Authentication
+Instead of tutorials, I learned by breaking and fixing things.
 
-JWT-based login/signup
+---
 
-Secure password hashing
+## What users can do
 
-Role-based access (Admin / Student)
+Users can:
+- Create accounts
+- Join groups
+- Chat live
+- Take quizzes
+- Upload files
 
-💬 Real-Time Chat
+Everything happens in real time.
 
-Live group messaging using Socket.IO
+---
 
-Typing indicators
+## Why I built this
 
-Read receipts
+I wanted a project that:
+- Has real backend logic  
+- Handles real-time data  
+- Works like a real product  
 
-Message edit/delete
+This is not a demo — it’s a working system.
 
-👥 Group System
+---
 
-Create, join, leave groups
+## Tech used
 
-Manage members
+Frontend:
+HTML, CSS, JavaScript
 
-Role-based controls
+Backend:
+Node.js, Express, MongoDB, Socket.IO, JWT
 
-📝 Quiz System
+---
 
-Create quizzes
+## Structure (simple view)
 
-Timed exams
+backend/ → server logic  
+frontend/ → UI  
+README.md → this file  
 
-Automatic submission
+---
 
-Real-time quiz updates
+## Run it locally (if someone wants)
 
-📁 File Sharing
+Create backend/.env with:
 
-Upload images, documents, and PDFs
+PORT=10000  
+MONGODB_URI=your_connection_string  
+JWT_SECRET=your_secret  
+CLIENT_URL=https://examconnect.netlify.app  
 
-Size/type validation
+Then:
 
-Secure static file serving
+cd backend  
+npm install  
+npm start  
 
-🧑‍💻 Tech Stack
-Backend
+---
 
-Node.js
+## Author
 
-Express.js
-
-MongoDB (Mongoose)
-
-JWT Authentication
-
-Socket.IO
-
-Frontend
-
-Vanilla JavaScript
-
-HTML5 + CSS3
-
-WebSockets (Socket.IO Client)
-
-Deployment
-
-Backend → Render
-
-Frontend → Netlify
-
-Database → MongoDB Atlas
-
-⚙️ Environment Variables
-
-Create a .env file in your backend:
-
-PORT=3000
-MONGODB_URI=your_mongodb_uri
-JWT_SECRET=your_jwt_secret
-JWT_EXPIRE=30d
-NODE_ENV=production
-CLIENT_URL=https://examconnect.netlify.app
-
-🛠️ Local Setup
-Clone the repo
-git clone https://github.com/Vivek-Sharma00/examConnect
-cd examConnect
-
-Install dependencies
-cd backend
-npm install
-
-cd ../frontend
-
-Run locally
-Backend
-cd backend
-npm start
-
-Frontend
-
-Open frontend/index.html in your browser.
-
-✅ Health Check Endpoint
-GET /api/health
-
-
-Example live URL:
-
-https://examconnect-backend.onrender.com/api/health
-
-📌 Future Improvements
-
-Email verification
-
-Password reset
-
-Push notifications
-
-Admin analytics dashboard
-
-👨‍💻 Author
-
-Vivek Sharma
-GitHub: https://github.com/Vivek-Sharma00
+Vivek Sharma  
+github.com/Vivek-Sharma00
