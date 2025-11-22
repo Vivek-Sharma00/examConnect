@@ -1,0 +1,177 @@
+/* Enhanced styles for the updated chat */
+
+.no-groups {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+}
+
+.no-groups i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+.no-groups p {
+    margin-bottom: 15px;
+}
+
+.own-message {
+    margin-left: auto;
+}
+
+.own-message .message-header {
+    justify-content: flex-end;
+}
+
+.own-message .sender-name {
+    order: 2;
+    margin-left: 10px;
+}
+
+.own-message .message-time {
+    order: 1;
+}
+
+.message-edited {
+    font-size: 0.8em;
+    opacity: 0.7;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.group-item {
+    position: relative;
+}
+
+.group-item.active .group-icon {
+    background: var(--secondary-color);
+}
+
+/* Loading animations */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.loading-pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Connection status animations */
+.connection-status {
+    transition: all 0.3s ease;
+}
+
+.connection-status.connected i {
+    animation: none;
+}
+
+.connection-status.connecting i {
+    animation: pulse 1s infinite;
+}
+
+/* File upload area enhancements */
+.file-upload-area {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.file-upload-area:hover {
+    border-color: var(--secondary-color);
+    background: rgba(37, 117, 252, 0.05);
+}
+
+.file-upload-area.dragover {
+    border-color: var(--secondary-color);
+    background: rgba(37, 117, 252, 0.1);
+}
+
+/* Button states */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-primary:disabled {
+    background: rgba(37, 117, 252, 0.5);
+}
+
+/* Responsive improvements for mobile */
+@media (max-width: 768px) {
+    .chat-container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: 30vh;
+    }
+    
+    .groups-list {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+    
+    .group-item {
+        min-width: 200px;
+        margin-right: 10px;
+    }
+    
+    .main-chat {
+        height: 70vh;
+    }
+    
+    .message {
+        max-width: 85%;
+    }
+    
+    .connection-status {
+        bottom: 10px;
+        right: 10px;
+        font-size: 12px;
+    }
+}
+
+/* Dark theme scrollbars */
+.messages-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.messages-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Focus states for accessibility */
+.message-input:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(37, 117, 252, 0.2);
+}
+
+.btn:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .message-input-container,
+    .sidebar,
+    .connection-status {
+        display: none !important;
+    }
+    
+    .main-chat {
+        width: 100% !important;
+    }
+}

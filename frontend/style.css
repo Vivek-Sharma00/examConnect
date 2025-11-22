@@ -1,0 +1,113 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+}
+
+/* Top right login/register */
+header {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#authBtn {
+  padding: 8px 20px;
+  border: 2px solid #00cfff;
+  border-radius: 20px;
+  background: transparent;
+  color: #00cfff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#authBtn:hover {
+  background: #00cfff;
+  color: white;
+}
+
+/* Center content */
+main {
+  text-align: center;
+  margin-top: -80px; /* shift up a bit */
+}
+
+main h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+main h1 {
+  font-size: 42px;
+  margin-bottom: 30px;
+}
+
+.exam {
+  font-weight: 400;
+  color: #444;
+}
+.connect {
+  font-weight: 700;
+  color: #444;
+}
+
+/* Main get started button */
+.main-btn {
+  display: block;
+  margin: 0 auto 20px;
+  padding: 15px 40px;
+  background: #00cfff;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.main-btn:hover {
+  background: #0099cc;
+}
+
+.arrow {
+  position: absolute;
+  top: 210px;
+  left: 400px;
+  width: 570px;
+}
+
+/* Demo buttons */
+.demo-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.login-btn {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.logout-btn {
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}

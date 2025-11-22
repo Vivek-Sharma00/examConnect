@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExamConnect - Online Examination Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="logo-icon">📝</span>
+                <span>ExamConnect</span>
+            </div>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" onclick="navigateToAuth()">Login / Register</button>
+            </div>
+        </header>
+
+        <div class="hero">
+            <h1>Streamline Your Exam Process</h1>
+            <p>Create, distribute, and manage question papers with ease. Perfect for educators and students alike.</p>
+            <button class="get-started" onclick="checkAuth()">Get Started</button>
+            
+            <div class="demo-buttons">
+                <button class="login-btn" onclick="demoLogin()">
+                    <i class="fas fa-sign-in-alt" style="margin-right: 8px;"></i>
+                    Demo: Login
+                </button>
+                <button class="logout-btn" onclick="demoLogout()">
+                    <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i>
+                    Demo: Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3>Create Question Papers</h3>
+                <p>Design custom exams with deadlines and access controls for different groups.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Group Management</h3>
+                <p>Organize users into groups of up to 500 members for targeted exam distribution.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Flexible Communication</h3>
+                <p>Allow discussions under each question paper with configurable chat permissions.</p>
+            </div>
+        </div>
+
+        <div class="how-it-works">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Sign Up</h3>
+                    <p>Create an account as an admin or member</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Create/Join</h3>
+                    <p>Admins create groups, members join groups</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Distribute</h3>
+                    <p>Admins send question papers with deadlines</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Engage</h3>
+                    <p>Members take exams and discuss in groups</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 ExamConnect. All rights reserved.</p>
+        <p>Designed for educators and students</p>
+    </footer>
+
+    <script type="module">
+        import apiService from './services/api.js';
+        
+        // Check if user is authenticated (using API service)
+        window.checkAuth = function() {
+            if (apiService.isAuthenticated()) {
+                // Redirect to chat page if logged in
+                window.location.href = 'chat/index.html';
+            } else {
+                // Redirect to auth page if not logged in
+                window.location.href = 'authentication/index.html';
+            }
+        };
+        
+        // Navigate to authentication page
+        window.navigateToAuth = function() {
+            window.location.href = 'authentication/index.html';
+        };
+        
+        // Demo function to simulate login (for demonstration only)
+        window.demoLogin = async function() {
+            try {
+                // Try to login with demo credentials
+                const response = await apiService.login('demo@examconnect.com', 'demo123');
+                
+                if (response.success) {
+                    alert('Demo: You are now logged in. Click "Get Started" to access the chat page.');
+                } else {
+                    // If demo account doesn't exist, create one
+                    await apiService.register({
+                        name: 'Demo User',
+                        email: 'demo@examconnect.com',
+                        password: 'demo123',
+                        role: 'admin'
+                    });
+                    alert('Demo: Account created and logged in. Click "Get Started" to access the chat page.');
+                }
+            } catch (error) {
+                console.error('Demo login error:', error);
+                alert('Demo: Error during login. Please try the actual registration form.');
+            }
+        };
+        
+        // Demo function to simulate logout (for demonstration only)
+        window.demoLogout = function() {
+            apiService.logout();
+            alert('Demo: You are now logged out.');
+        };
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is already logged in
+            if (apiService.isAuthenticated()) {
+                console.log('User is already logged in');
+            }
+        });
+    </script>
+</body>
+</html>

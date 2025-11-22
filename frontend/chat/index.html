@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExamConnect - Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-graduation-cap"></i> ExamConnect</h2>
+                <div class="user-info">
+                    <span id="user-name">Loading...</span>
+                    <span id="user-role">Loading...</span>
+                </div>
+            </div>
+            
+            <div class="groups-section">
+                <div class="section-header">
+                    <h3>Your Groups</h3>
+                    <button id="create-group-btn" class="icon-btn" title="Create New Group">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="group-search" placeholder="Search groups...">
+                </div>
+                
+                <div class="groups-list" id="groups-list">
+                    <div class="loading-groups">
+                        <i class="fas fa-spinner fa-spin"></i> Loading groups...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="main-chat">
+            <div class="chat-header">
+                <div class="chat-info">
+                    <h3 id="current-group-name">Select a group</h3>
+                    <span id="member-count">0 members</span>
+                </div>
+                <div class="chat-actions">
+                    <button id="group-info-btn" class="icon-btn" title="Group Info">
+                        <i class="fas fa-info-circle"></i>
+                    </button>
+                    <button id="refresh-btn" class="icon-btn" title="Refresh">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="messages-container" id="messages-container">
+                <div class="welcome-message">
+                    <i class="fas fa-comments"></i>
+                    <h3>Welcome to ExamConnect Chat</h3>
+                    <p>Select a group from the sidebar to start chatting</p>
+                </div>
+            </div>
+
+            <div class="message-input-container">
+                <div class="input-actions">
+                    <button id="attach-file-btn" class="icon-btn" title="Attach File">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <button id="send-quiz-btn" class="icon-btn" title="Send Quiz">
+                        <i class="fas fa-poll"></i>
+                    </button>
+                </div>
+                <div class="message-input-wrapper">
+                    <input type="text" id="message-input" placeholder="Type your message here..." disabled>
+                    <button id="send-message-btn" class="send-btn" title="Send Message" disabled>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="create-group-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Group</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="group-name">Group Name</label>
+                    <input type="text" id="group-name" placeholder="Enter group name">
+                </div>
+                <div class="form-group">
+                    <label for="group-description">Description</label>
+                    <textarea id="group-description" placeholder="Enter group description"></textarea>
+                </div>
+                <button id="create-group-submit" class="btn-primary">
+                    <span id="create-group-text">Create Group</span>
+                    <span id="create-group-spinner" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Creating...
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="quiz-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create Quiz Question</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="quiz-question">Question</label>
+                    <textarea id="quiz-question" placeholder="Enter your question"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Question Type</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="quiz-type" value="multiple-choice" checked>
+                            Multiple Choice
+                        </label>
+                        <label>
+                            <input type="radio" name="quiz-type" value="short-answer">
+                            Short Answer
+                        </label>
+                    </div>
+                </div>
+                <div id="multiple-choice-options">
+                    <div class="form-group">
+                        <label>Options</label>
+                        <input type="text" class="quiz-option" placeholder="Option 1">
+                        <input type="text" class="quiz-option" placeholder="Option 2">
+                        <button id="add-option-btn" class="btn-secondary">Add Option</button>
+                    </div>
+                </div>
+                <button id="send-quiz-submit" class="btn-primary">Send Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="file-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Upload File</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="file-upload-area" id="file-upload-area">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & drop files here or click to browse</p>
+                    <input type="file" id="file-input" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif">
+                </div>
+                <div class="file-preview" id="file-preview" style="display: none;">
+                    <div class="file-info">
+                        <i class="fas fa-file"></i>
+                        <span id="file-name"></span>
+                        <button onclick="clearFile()" class="icon-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <button id="send-file-btn" class="btn-primary" disabled>
+                    <span id="send-file-text">Send File</span>
+                    <span id="send-file-spinner" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Uploading...
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Connection Status -->
+    <div id="connection-status" class="connection-status">
+        <i class="fas fa-wifi"></i>
+        <span>Connecting...</span>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
