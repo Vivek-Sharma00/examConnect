@@ -6,8 +6,11 @@ const Group = require('../models/Group');
 const configureSocket = (server) => {
     const io = socketIO(server, {
         cors: {
-            origin: process.env.CLIENT_URL || "http://localhost:5500",
-            methods: ["GET", "POST"]
+        origin: [
+            "https://examconnect.netlify.app",
+            "http://localhost:5500"
+        ],
+        methods: ["GET", "POST"]
         }
     });
 

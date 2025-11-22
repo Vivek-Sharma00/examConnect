@@ -1,5 +1,9 @@
-import config from '../config.js';
+import getConfig from '../config.js';
+const config = getConfig();
+
 import apiService from './api.js';
+import { io } from "https://cdn.socket.io/4.7.2/socket.io.esm.min.js";
+
 
 class SocketService {
     constructor() {

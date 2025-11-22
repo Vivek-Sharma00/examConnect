@@ -43,9 +43,9 @@ const getConfig = () => {
         // Production - update these URLs for your production server
         return {
             ...CONFIG,
-            API_BASE_URL: 'https://your-production-domain.com/api',
-            SOCKET_URL: 'https://your-production-domain.com',
-            UPLOAD_URL: 'https://your-production-domain.com/uploads'
+            API_BASE_URL: 'https://examconnect-backend.onrender.com/api',
+            SOCKET_URL: 'https://examconnect-backend.onrender.com',
+            UPLOAD_URL: 'https://examconnect-backend.onrender.com/uploads'
         };
     }
 };

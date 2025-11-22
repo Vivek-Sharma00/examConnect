@@ -1,4 +1,5 @@
-import config from '../config.js';
+import getConfig from '../config.js';
+const config = getConfig();
 
 class ApiService {
     constructor() {

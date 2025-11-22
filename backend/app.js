@@ -25,7 +25,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS – production safe
 app.use(cors({
-    origin: '*',
+    origin: [
+        'https://examconnect.netlify.app',
+        'http://localhost:5500'
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
