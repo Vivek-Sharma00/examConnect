@@ -50,4 +50,4 @@ const getConfig = () => {
     }
 };
 
-export default getConfig();
+export default getConfig;
