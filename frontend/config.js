@@ -1,8 +1,8 @@
 // Frontend Configuration
 const CONFIG = {
-    API_BASE_URL: 'http://localhost:3000/api',
-    SOCKET_URL: 'http://localhost:3000',
-    UPLOAD_URL: 'http://localhost:3000/uploads',
+    API_BASE_URL: 'https://examconnect-backend.onrender.com/api',
+    SOCKET_URL: 'https://examconnect-backend.onrender.com',
+    UPLOAD_URL: 'https://examconnect-backend.onrender.com/uploads',
     
     // LocalStorage keys
     STORAGE_KEYS: {
